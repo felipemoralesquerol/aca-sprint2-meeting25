@@ -9,6 +9,8 @@
 npm install cors --save
 # Entidades incluidas
 - Bandas 
+- Albumes 
+- Canciones
 
 
 # Instrucciones para desarrollar localmente
