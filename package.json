@@ -1,0 +1,22 @@
+{
+  "name": "aca-sprint2-meeting24",
+  "version": "1.0.0",
+  "description": "MySQL II",
+  "main": "src/app.js",
+  "scripts": {
+    "dev": "npx kill-port 3000 && nodemon node src/app",
+    "list": "echo 'hola'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.2",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.0",
+    "sequelize": "^6.6.5"
+  }
+}
