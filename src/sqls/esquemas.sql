@@ -3,7 +3,7 @@ create table bandas (
     nombre varchar(100) not null,
     integrantes integer not null,
     fecha_inicio date not null,
-    fecha_separación date,
+    fecha_separacion date,
     pais_id integer not null,
     primary key (id)
 );
