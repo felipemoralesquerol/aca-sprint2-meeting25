@@ -1,11 +1,9 @@
 // Conector a la base de datos
 const sequelize = require('../database/db');
 
-const tableName = 'bandas';
-const relation1 = 'albumes'
-
 // Importación de modelos
-const bandaModel = require('../models/bandas');
+const televisoresModel = require('../models/televisores');
+const tableName = 'televisores';
 
 exports.Exist = async function (req, res, next) {
     try {
@@ -17,10 +15,17 @@ exports.Exist = async function (req, res, next) {
         cadena = `SELECT * FROM ${tableName} WHERE id = ${req.params.id};`
         const respuesta = await sequelize.query(cadena, { type: sequelize.QueryTypes.SELECT });
         console.log(respuesta);
+        // cadena = {
+        //     where: { id: req.params.id }
+        // }
+        // const respuesta = await televisoresModel.findByPk(req.params.id);
+        // console.log(respuesta);
+
         if (respuesta.length > 0) {
-            cadenaRelation1 = `SELECT * FROM ${relation1} WHERE banda_id = ${req.params.id}`;
-            const respuestaRelation1 = await sequelize.query(cadenaRelation1, { type: sequelize.QueryTypes.SELECT });
-            req.banda = { banda: respuesta, albumes: [respuestaRelation1] };
+            // cadenaRelation1 = `SELECT * FROM ${relation1} WHERE banda_id = ${req.params.id}`;
+            // const respuestaRelation1 = await sequelize.query(cadenaRelation1, { type: sequelize.QueryTypes.SELECT });
+            // req.banda = { banda: respuesta, albumes: [respuestaRelation1] };
+            req.banda = { banda: respuesta };
             next();
         } else {
             res.status(404).json({ status: 'No encontrado' });
@@ -51,7 +56,7 @@ exports.Search = async function (req, res, next) {
         cadena = {
             where: { nombre: req.query.nombre }
         }
-        const respuesta = await bandaModel.findAll(cadena);
+        const respuesta = await televisoresModel.findAll(cadena);
         if (respuesta.length > 0) {
             res.json(respuesta);
         } else {
@@ -68,7 +73,7 @@ exports.Search = async function (req, res, next) {
 
 exports.List = async function (req, res, next) {
     try {
-        const todos = await bandaModel.findAll();
+        const todos = await televisoresModel.findAll();
         console.log(todos);
         res.json(todos);
     }
@@ -79,21 +84,22 @@ exports.List = async function (req, res, next) {
 };
 
 exports.Count = async function (req, res, next) {
-    const todos = await bandaModel.findAndCountAll(); // TODO:refactoring +  performance optimization
+    const todos = await televisoresModel.findAndCountAll(); // TODO:refactoring +  performance optimization
     res.json({ cant: todos.count });
 };
 
 exports.Add = async function (req, res, next) {
     try {
         cadena = {
-            nombre: req.body.nombre,
-            integrantes: req.body.integrantes,
-            fecha_inicio: req.body.fecha_inicio,
-            fecha_separacion: req.body.fecha_inicio,
-            pais: req.body.pais
+
+            marcaId: req.body.marcaId,
+            modeloId: req.body.modeloId,
+            smart: req.body.smart,
+            precio: req.body.precio,
+            pantalla: req.body.pantalla
         };
         console.log(req.body, cadena);
-        const resultado = await bandaModel.create(cadena);
+        const resultado = await televisoresModel.create(cadena);
         res.json(resultado.toJSON);
     }
     catch (err) {
@@ -105,15 +111,16 @@ exports.Add = async function (req, res, next) {
 
 exports.Update = async function (req, res, next) {
     try {
-        cadena = `UPDATE ${tableName} SET nombre='${req.body.nombre}',
-                      integrantes=${req.body.integrantes}, 
-                      fecha_inicio='${req.body.fecha_inicio}',
-                      fecha_separación='${req.body.fecha_separación}',
-                      pais='${req.body.pais}'
-                  WHERE id=${req.params.id}`;
+        cadena = {
+            nombre: req.body.nombre,
+            integrantes: req.body.integrantes,
+            fecha_inicio: req.body.fecha_inicio,
+            fecha_separacion: req.body.fecha_inicio,
+            pais: req.body.pais
+        };
         console.log(req.body, cadena);
-        const resultado = await sequelize.query(cadena, { type: sequelize.QueryTypes.UPDATE });
-        res.json(resultado);
+        const resultado = await televisoresModel.update(cadena, { where: { id: req.params.id } });
+        res.json({ status: resultado.toJSON });
     }
     catch (err) {
         console.log(err.message);
@@ -122,7 +129,7 @@ exports.Update = async function (req, res, next) {
 }
 exports.Delete = async function (req, res, next) {
     try {
-        const resultado = await bandaModel.destroy({
+        const resultado = await televisoresModel.destroy({
             where: { id: req.params.id }
         });
         console.log(resultado)

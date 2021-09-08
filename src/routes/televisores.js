@@ -3,7 +3,7 @@ const app = express();
 
 const router = express.Router();
 
-const Controller = require('../controllers/canciones');
+const Controller = require('../controllers/televisores');
 
 router.get('/', Controller.List);
 router.get('/count', Controller.Count)
@@ -16,4 +16,5 @@ router.delete('/:id', Controller.Exist, Controller.Delete);
 router.put('/:id', Controller.Exist, Controller.Update);
 
 module.exports = router;
+
 

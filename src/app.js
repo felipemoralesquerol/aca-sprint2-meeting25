@@ -7,9 +7,9 @@ const morgan = require('morgan');
 require('dotenv').config();
 
 // Info gestionada en MySQL
-const bandasRouter = require('./routes/bandas');
-const albumesRouter = require('./routes/albumes');
-const cancionesRouter = require('./routes/canciones')
+const televisoresRouter = require('./routes/televisores');
+// const albumesRouter = require('./routes/albumes');
+// const cancionesRouter = require('./routes/canciones')
 
 
 // Importaciones adicionales
@@ -24,9 +24,9 @@ app.use(morgan('combined'));
 app.use(cors());
 app.options('*', cors());
 
-app.use('/bandas', bandasRouter);
-app.use('/albumes', albumesRouter);
-app.use('/canciones', cancionesRouter);
+app.use('/televisores', televisoresRouter);
+// app.use('/albumes', albumesRouter);
+// app.use('/canciones', cancionesRouter);
 
 app.use('/version', (req, res) => {
     const admin = new mongoose.mongo.Admin(mongoose.connection.db);

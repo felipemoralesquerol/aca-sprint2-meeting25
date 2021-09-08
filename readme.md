@@ -8,9 +8,9 @@
 
 npm install cors --save
 # Entidades incluidas
-- Bandas 
-- Albumes 
-- Canciones
+- Televisores 
+- Marcas 
+- Modelos
 
 
 # Instrucciones para desarrollar localmente
