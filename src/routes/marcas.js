@@ -3,13 +3,13 @@ const app = express();
 
 const router = express.Router();
 
-const Controller = require('../controllers/televisores');
+const Controller = require('../controllers/marcas');
 
 router.get('/', Controller.List);
 router.get('/count', Controller.Count)
 router.get('/search', Controller.Search);
 
-router.get('/:id', Controller.Exist, (req, res) => { res.json(req.televisor) });
+router.get('/:id', Controller.Exist, (req, res) => { res.json(req.marca) });
 
 router.post('/', Controller.Add);
 router.delete('/:id', Controller.Exist, Controller.Delete);

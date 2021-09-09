@@ -2,8 +2,8 @@
 const sequelize = require('../database/db');
 
 // Importación de modelos
-const televisoresModel = require('../models/televisor');
-const tableName = 'televisores';
+const televisoresModel = require('../models/marca');
+const tableName = 'marcas';
 
 exports.Exist = async function (req, res, next) {
     try {

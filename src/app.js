@@ -8,9 +8,11 @@ require('dotenv').config();
 
 // Info gestionada en MySQL
 const televisoresRouter = require('./routes/televisores');
-// const albumesRouter = require('./routes/albumes');
-// const cancionesRouter = require('./routes/canciones')
+const marcasRouter = require('./routes/marcas');
+const modelosRouter = require('./routes/modelos')
 
+// Info de asociaciones
+asociaciones = require('./models/associations');
 
 // Importaciones adicionales
 const cors = require('cors');
@@ -25,8 +27,8 @@ app.use(cors());
 app.options('*', cors());
 
 app.use('/televisores', televisoresRouter);
-// app.use('/albumes', albumesRouter);
-// app.use('/canciones', cancionesRouter);
+app.use('/marcas', marcasRouter);
+app.use('/modelos', modelosRouter);
 
 app.use('/version', (req, res) => {
     const admin = new mongoose.mongo.Admin(mongoose.connection.db);

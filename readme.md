@@ -18,3 +18,41 @@ npm install cors --save
 
 ### Ejecución de test de postman (requiere npm install -g newman)
 newman run postman/postman.json 
+
+
+# Videos de interes:
+1 to 1:
+https://www.youtube.com/watch?v=ocysQ07G4PQ
+
+1 to n:
+https://www.youtube.com/watch?v=wgLo_0FL0yc
+
+n to n:
+
+# Carga de datos
+## Requiere:
+`npm install -g sequelize-cli`
+## Creación de archivo seed de televisores
+`npx sequelize-cli seed:generate --name create-televisores` genera un archivo en la carpeta seeds del proyecto
+
+## Cargar los datos de interes en el archivo seed generado
+
+## Para "sembrar los datos en la base de datos", si no lo hizo antes se deberá:
+`sequelize init`
+Pueder borrar las carpetas migrations y models (no las usaremos)
+
+## Configurar el archivo config/config.jsos (utilizado por sequelize-cli)
+
+## Ejecutar todos los seeds se deberá hacer de la siguiente manera:
+npx sequelize-cli db:seed:all
+
+## Ejecutar un seed en particular se deberá hacer de la siguiente manera:
+npx sequelize-cli db:seed:20210909030232-create-data
+
+## Para deshacer el ingreso de un determnado seed se deberá hacer de la siguiente manera:
+npx sequelize-cli db:seed:undo --seed:20210909030232-create-data
+
+## Para deshacer todos los seeds se deberá hacer de la siguiente manera:
+npx sequelize-cli db:seed:undo
+
+
