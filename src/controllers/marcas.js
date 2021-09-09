@@ -2,7 +2,9 @@
 const sequelize = require('../database/db');
 
 // Importación de modelos
-const televisoresModel = require('../models/marca');
+const marcaModel = require('../models/marca');
+const modeloModel = require('../models/modelo');
+
 const tableName = 'marcas';
 
 exports.Exist = async function (req, res, next) {
@@ -18,7 +20,7 @@ exports.Exist = async function (req, res, next) {
         // cadena = {
         //     where: { id: req.params.id }
         // }
-        // const respuesta = await televisoresModel.findByPk(req.params.id);
+        // const respuesta = await marcaModel.findByPk(req.params.id);
         // console.log(respuesta);
 
         if (respuesta.length > 0) {
@@ -56,7 +58,7 @@ exports.Search = async function (req, res, next) {
         cadena = {
             where: { nombre: req.query.nombre }
         }
-        const respuesta = await televisoresModel.findAll(cadena);
+        const respuesta = await marcaModel.findAll(cadena);
         if (respuesta.length > 0) {
             res.json(respuesta);
         } else {
@@ -73,7 +75,7 @@ exports.Search = async function (req, res, next) {
 
 exports.List = async function (req, res, next) {
     try {
-        const todos = await televisoresModel.findAll();
+        const todos = await marcaModel.findAll();
         console.log(todos);
         res.json(todos);
     }
@@ -83,8 +85,25 @@ exports.List = async function (req, res, next) {
     }
 };
 
+
+exports.ListModelos = async function (req, res, next) {
+    try {
+        const todos = await marcaModel.findAll({
+            where: { id: req.params.id },
+            include: [{ model: modeloModel, attributes: ["nombre"] }]
+        });
+        console.log(todos);
+        res.json(todos);
+    }
+    catch (err) {
+        console.log(err.message);
+        res.status(500).json({ status: 'Error interno', texto: err.message });
+    }
+};
+
+
 exports.Count = async function (req, res, next) {
-    const todos = await televisoresModel.findAndCountAll(); // TODO:refactoring +  performance optimization
+    const todos = await marcaModel.findAndCountAll(); // TODO:refactoring +  performance optimization
     res.json({ cant: todos.count });
 };
 
@@ -99,7 +118,7 @@ exports.Add = async function (req, res, next) {
             pantalla: req.body.pantalla
         };
         console.log(req.body, cadena);
-        const resultado = await televisoresModel.create(cadena);
+        const resultado = await marcaModel.create(cadena);
         res.json(resultado.toJSON);
     }
     catch (err) {
@@ -119,7 +138,7 @@ exports.Update = async function (req, res, next) {
             pais: req.body.pais
         };
         console.log(req.body, cadena);
-        const resultado = await televisoresModel.update(cadena, { where: { id: req.params.id } });
+        const resultado = await marcaModel.update(cadena, { where: { id: req.params.id } });
         res.json({ status: resultado.toJSON });
     }
     catch (err) {
@@ -129,7 +148,7 @@ exports.Update = async function (req, res, next) {
 }
 exports.Delete = async function (req, res, next) {
     try {
-        const resultado = await televisoresModel.destroy({
+        const resultado = await marcaModel.destroy({
             where: { id: req.params.id }
         });
         console.log(resultado)

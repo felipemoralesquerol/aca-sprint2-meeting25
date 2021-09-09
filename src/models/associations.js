@@ -19,3 +19,4 @@ televisorModel.belongsTo(modeloModel);
 modeloModel.belongsTo(marcaModel);
 
 
+marcaModel.hasOne(modeloModel);

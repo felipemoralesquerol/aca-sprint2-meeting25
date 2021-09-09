@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 // Conector a la base de datos
 const sequelize = require('../database/db');
 
@@ -83,6 +84,38 @@ exports.List = async function (req, res, next) {
     }
 };
 
+exports.ListGreaterThan = async function (req, res, next) {
+    try {
+        const todos = await televisoresModel.findAll({
+            where: {
+                precio: { [Op.gte]: req.params.price }
+            }
+        });
+        console.log(todos);
+        res.json(todos);
+    }
+    catch (err) {
+        console.log(err.message);
+        res.status(500).json({ status: 'Error interno', texto: err.message });
+    }
+};
+
+
+exports.ListLessThan = async function (req, res, next) {
+    try {
+        const todos = await televisoresModel.findAll({
+            where: {
+                precio: { [Op.lte]: req.params.price }
+            }
+        });
+        console.log(todos);
+        res.json(todos);
+    }
+    catch (err) {
+        console.log(err.message);
+        res.status(500).json({ status: 'Error interno', texto: err.message });
+    }
+}
 exports.Count = async function (req, res, next) {
     const todos = await televisoresModel.findAndCountAll(); // TODO:refactoring +  performance optimization
     res.json({ cant: todos.count });
