@@ -6,8 +6,9 @@ const router = express.Router();
 const Controller = require('../controllers/televisores');
 
 router.get('/', Controller.List);
-router.get('/:price/greaterThan/', Controller.ListGreaterThan);
-router.get('/:price/lessThan/', Controller.ListLessThan);
+router.get('/priceOrdered', Controller.ListPriceOrdered);
+router.get('/:price/greaterThan/', Controller.ListPriceGreaterThan);
+router.get('/:price/lessThan/', Controller.ListPriceLessThan);
 
 router.get('/count', Controller.Count)
 router.get('/search', Controller.Search);

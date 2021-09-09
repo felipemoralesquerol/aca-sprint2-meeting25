@@ -84,7 +84,20 @@ exports.List = async function (req, res, next) {
     }
 };
 
-exports.ListGreaterThan = async function (req, res, next) {
+exports.ListPriceOrdered = async function (req, res, next) {
+    try {
+        const todos = await televisoresModel.findAll(
+            { order: [['precio', 'ASC']] }
+        );
+        console.log(todos);
+        res.json(todos);
+    }
+    catch (err) {
+        console.log(err.message);
+        res.status(500).json({ status: 'Error interno', texto: err.message });
+    }
+};
+exports.ListPriceGreaterThan = async function (req, res, next) {
     try {
         const todos = await televisoresModel.findAll({
             where: {
@@ -101,7 +114,7 @@ exports.ListGreaterThan = async function (req, res, next) {
 };
 
 
-exports.ListLessThan = async function (req, res, next) {
+exports.ListPriceLessThan = async function (req, res, next) {
     try {
         const todos = await televisoresModel.findAll({
             where: {
