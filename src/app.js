@@ -17,9 +17,14 @@ asociaciones = require('./models/associations');
 // Importaciones adicionales
 const cors = require('cors');
 const express = require('express');
+const helmet = require('helmet');
 const app = express();
 
 // Settings
+app.use(helmet({
+    contentSecurityPolicy: true,
+}));
+
 app.use(express.json());
 app.use(morgan('combined'));
 // Gestión de cors
