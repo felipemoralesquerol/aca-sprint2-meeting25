@@ -80,7 +80,7 @@ exports.List = async function (req, res, next) {
     }
     catch (err) {
         console.log(err.message);
-        res.status(500).json({ status: 'Error interno', texto: err.message });
+        res.status(500).json({ status: 'Error interno' });
     }
 };
 
@@ -94,7 +94,7 @@ exports.ListPriceOrdered = async function (req, res, next) {
     }
     catch (err) {
         console.log(err.message);
-        res.status(500).json({ status: 'Error interno', texto: err.message });
+        res.status(500).json({ status: 'Error interno' });
     }
 };
 exports.ListPriceGreaterThan = async function (req, res, next) {
@@ -109,7 +109,7 @@ exports.ListPriceGreaterThan = async function (req, res, next) {
     }
     catch (err) {
         console.log(err.message);
-        res.status(500).json({ status: 'Error interno', texto: err.message });
+        res.status(500).json({ status: 'Error interno' });
     }
 };
 
@@ -126,7 +126,7 @@ exports.ListPriceLessThan = async function (req, res, next) {
     }
     catch (err) {
         console.log(err.message);
-        res.status(500).json({ status: 'Error interno', texto: err.message });
+        res.status(500).json({ status: 'Error interno' });
     }
 }
 exports.Count = async function (req, res, next) {
