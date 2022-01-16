@@ -47,7 +47,7 @@
 ## Ejecutar un seed en particular se deberá hacer de la siguiente manera:
 `npx sequelize-cli db:seed:20210909030232-create-data`
 
-## Para deshacer el ingreso de un determnado seed se deberá hacer de la siguiente manera:
+## Para deshacer el ingreso de un determinado seed se deberá hacer de la siguiente manera:
 `npx sequelize-cli db:seed:undo --seed:20210909030232-create-data`
 
 ## Para deshacer todos los seeds se deberá hacer de la siguiente manera:
